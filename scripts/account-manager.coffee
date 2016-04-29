@@ -8,13 +8,12 @@ module.exports = (robot) ->
       if err
         throw err
       else if result
-        res.reply JSON.parse result
+        res.reply result
       else
         res.reply "key: #{redis_key}は見つかりません"
 
   robot.respond /set account (.*) (.*)/i, (res) ->
     redis_key = res.message.user.name
-    res.send res.match[1].trim()
     client = Redis.createClient()
     client.get "#{redis_key}", (err, result) ->
       if err
