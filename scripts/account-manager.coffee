@@ -19,7 +19,7 @@ module.exports = (robot) ->
       if err
         throw err
       redis_val = result
-      redis_val.[res.match[1].trim()] = res.match[2].trim()
+      redis_val[res.match[1].trim()] = res.match[2].trim()
       client.set "#{redis_key}", "#{redis_val}", (err, keys_replies) ->
         if err
           throw err
@@ -33,7 +33,7 @@ module.exports = (robot) ->
         throw err
       else if result
         redis_val = result
-        delete redis_val.[res.match[1].trim()]
+        delete redis_val[res.match[1].trim()]
         client.set "#{redis_key}", "#{redis_val}", (err, keys_replies) ->
           if err
             throw err
