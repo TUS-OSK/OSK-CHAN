@@ -19,6 +19,6 @@
     "node": "0.10.x"
   },
   "scripts": {
-    "start": "bin/hubot-a slack"
+    "start": "bin/hubot -a slack"
   }
 }
