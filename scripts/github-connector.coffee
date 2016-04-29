@@ -26,7 +26,7 @@ module.exports = (robot) ->
             throw err
           res.reply "OK! #{redis_val} #{keys_replies}"
       else
-        redis_val.github = res.match[1].trim()
+        redis_val {github: res.match[1].trim()}
         client.set "#{redis_key}", "#{redis_val}", (err, keys_replies) ->
           if err
             throw err
