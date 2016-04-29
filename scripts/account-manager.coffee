@@ -18,12 +18,13 @@ module.exports = (robot) ->
     client.get "#{redis_key}", (err, result) ->
       if err
         throw err
-      redis_val = result
+      redis_val = JSON.parse result
       redis_val[res.match[1].trim()] = res.match[2].trim()
+      redis_val = JSON.stringify redis_val
       client.set "#{redis_key}", "#{redis_val}", (err, keys_replies) ->
         if err
           throw err
-        res.reply "OK! #{JSON.stringify redis_val}"
+        res.reply "OK! #{redis_val}"
 
   robot.respond /delete account (.*)/i, (res) ->
     redis_key = res.message.user.name
@@ -32,8 +33,9 @@ module.exports = (robot) ->
       if err
         throw err
       else if result
-        redis_val = result
+        redis_val = JSON.parse result
         delete redis_val[res.match[1].trim()]
+        redis_val = JSON.stringify redis_val
         client.set "#{redis_key}", "#{redis_val}", (err, keys_replies) ->
           if err
             throw err
