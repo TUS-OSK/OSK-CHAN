@@ -7,7 +7,7 @@ module.exports = (robot) ->
     client.get "#{redis_key}", (err, result) ->
       if err
         throw err
-      else if reslt
+      else if result
         res.send JSON.parse result
       else
         res.send "key: #{redis_key}は見つかりません"
@@ -30,4 +30,4 @@ module.exports = (robot) ->
         client.set "#{redis_key}", "#{redis_val}", (err, keys_replies) ->
           if err
             throw err
-          res.reply "OK! #{redis_val} #{keys_replies}"
+          res.reply "OK! #{JSON.stringify redis_val}"
